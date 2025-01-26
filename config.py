@@ -4,39 +4,8 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
 from hooks import *
+from binds import *
 from widgets import widgets
-
-mod = "mod4"
-terminal = guess_terminal()
-
-keys = [
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod],"f",lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
-    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-]
-
-
-groups = [Group(i) for i in "123456789"]
-
-for i in groups:
-    keys.extend(
-        [
-            Key(
-                [mod],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc=f"Switch to group {i.name}",
-            ),
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc=f"Switch to & move focused window to group {i.name}",
-            ),
-        ]
-    )
 
 layouts = [
     layout.MonadTall(
@@ -56,4 +25,4 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 screens = [Screen(bottom=bar.Bar(size=24,widgets=widgets),
-           wallpaper="/home/nameless/.config/qtile/wallpaper.jpg")]
+           wallpaper="/home/nameless/.config/qtile/resources/wallpaper.jpg")]
